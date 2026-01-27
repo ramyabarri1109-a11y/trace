@@ -1,128 +1,128 @@
-# TRACE – Telecom RAN AI-Powered Cognitive Engine# T.R.A.C.E. – Traffic & Resource Agentic Control Engine
+# TRACE – Telecom RAN AI-Powered Cognitive Engine# TRACE – Telecom RAN AI-Powered Cognitive Engine# T.R.A.C.E. – Traffic & Resource Agentic Control Engine
 
 
 
-<div align="center">**Team**: Vinay Dangeti, Sudeep Aryan, G S Neelam, Ramya, Aishwarya  
+<div align="center">
 
-**Contact**: sudeeparyang@gmail.com  
 
-![AWS](https://img.shields.io/badge/AWS-Bedrock-FF9900?style=for-the-badge&logo=amazon-aws)**Project**: Breaking Barriers for Agentic Networks
+
+![AWS](https://img.shields.io/badge/AWS-Bedrock-FF9900?style=for-the-badge&logo=amazon-aws)<div align="center">**Team**: Vinay Dangeti, Sudeep Aryan, G S Neelam, Ramya, Aishwarya  
 
 ![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react)
 
-![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)---
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)**Contact**: sudeeparyang@gmail.com  
 
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-## ⚡ Quick Start (JSON Upload Fix Included!)
+![AWS](https://img.shields.io/badge/AWS-Bedrock-FF9900?style=for-the-badge&logo=amazon-aws)**Project**: Breaking Barriers for Agentic Networks
 
 **An autonomous, self-healing telecom network management system powered by Amazon Bedrock Multi-Agent Architecture**
 
-```bash
+![React](https://img.shields.io/badge/React-18.2-61DAFB?style=for-the-badge&logo=react)
 
-[Live Demo](https://d1cmtnu8ims6nq.cloudfront.net) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [AWS Services](#-aws-services-used)# Test the JSON upload fix
+[Live Demo](https://d1cmtnu8ims6nq.cloudfront.net) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [AWS Services](#-aws-services-used)
 
-python test_json_upload_fix.py
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python)---
 
 </div>
 
-# Start TRACE (patch auto-applies)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
----start_trace.bat   # Windows
+---
 
-# OR
+## ⚡ Quick Start (JSON Upload Fix Included!)
 
-## 📋 Overviewadk web           # Direct start
+## 📋 Overview
 
+**An autonomous, self-healing telecom network management system powered by Amazon Bedrock Multi-Agent Architecture**
 
+TRACE is an AI-driven multi-agent system that transforms telecom network operations from reactive troubleshooting to proactive, autonomous management. Built entirely on AWS, it uses Amazon Bedrock Agents to monitor, predict, decide, and remediate network issues in real-time.
 
-TRACE is an AI-driven multi-agent system that transforms telecom network operations from reactive troubleshooting to proactive, autonomous management. Built entirely on AWS, it uses Amazon Bedrock Agents to monitor, predict, decide, and remediate network issues in real-time.# Open browser: http://localhost:8000
+```bash
 
-# Upload JSON files - they work now! 🎉
+### Key Capabilities
 
-### Key Capabilities```
+[Live Demo](https://d1cmtnu8ims6nq.cloudfront.net) • [Architecture](#-architecture) • [Quick Start](#-quick-start) • [AWS Services](#-aws-services-used)# Test the JSON upload fix
 
+| Capability | Description |
 
-
-| Capability | Description |**✅ JSON File Upload Issue RESOLVED:**  
-
-|------------|-------------|The `400 INVALID_ARGUMENT - application/json mimeType not supported` error has been fixed with an automatic conversion patch. See [`JSON_UPLOAD_FIX_COMPLETE.md`](JSON_UPLOAD_FIX_COMPLETE.md) for details.
+|------------|-------------|python test_json_upload_fix.py
 
 | **Autonomous Remediation** | AI agents automatically detect and fix network issues |
 
-| **Multi-Agent Orchestration** | 8 specialized agents working collaboratively |---
+| **Multi-Agent Orchestration** | 8 specialized agents working collaboratively |</div>
 
 | **Real-time Monitoring** | Live telemetry streaming and visualization |
 
-| **Self-Healing Network** | Automatic recovery from failures with minimal human intervention |## 📋 Summary
+| **Self-Healing Network** | Automatic recovery from failures with minimal human intervention |# Start TRACE (patch auto-applies)
 
 | **Energy Optimization** | Intelligent power management during low-demand periods |
 
-TRACE is an agentic multi-agent system that cuts mobile-tower energy use by 30–40% during low demand and prevents congestion during traffic surges by coordinating Agent-to-Agent (A2A) communication via Model Context Protocol (MCP), leveraging Amazon Bedrock AgentCore and implementing intelligent cloud-edge control using Google's Agent Development Kit (ADK).
+---start_trace.bat   # Windows
 
 ---
 
----
+# OR
 
 ## 🎯 Problem Statement
 
-## 🎯 Problem Statement
+## 📋 Overviewadk web           # Direct start
 
 Modern telecom operators face critical challenges:
 
-Modern mobile networks face three major challenges:
+
 
 | Challenge | Impact |
 
-|-----------|--------|### 1. Energy Inefficiency
+|-----------|--------|TRACE is an AI-driven multi-agent system that transforms telecom network operations from reactive troubleshooting to proactive, autonomous management. Built entirely on AWS, it uses Amazon Bedrock Agents to monitor, predict, decide, and remediate network issues in real-time.# Open browser: http://localhost:8000
 
-| **Network Complexity** | 5G/O-RAN architectures increased network elements by 10x |- Towers consume power continuously, even during low traffic hours
+| **Network Complexity** | 5G/O-RAN architectures increased network elements by 10x |
 
-| **Reactive Operations** | 73% of outages detected by customers before NOC teams |- Results in high energy costs and carbon emissions
+| **Reactive Operations** | 73% of outages detected by customers before NOC teams |# Upload JSON files - they work now! 🎉
 
-| **Slow Resolution** | Average Mean Time to Repair (MTTR) is 4-6 hours |- Idle transmitters and radios remain active without demand-aware control
+| **Slow Resolution** | Average Mean Time to Repair (MTTR) is 4-6 hours |
 
-| **Skill Shortage** | 40% global shortage of trained network engineers |
+| **Skill Shortage** | 40% global shortage of trained network engineers |### Key Capabilities```
 
-| **Revenue Loss** | $1-5M lost per hour of network downtime |### 2. Network Congestion During High Demand
+| **Revenue Loss** | $1-5M lost per hour of network downtime |
 
-- Events like concerts, festivals, or emergencies overload specific towers
 
-**TRACE solves this** by deploying AI agents that continuously monitor, predict issues before they occur, and automatically remediate problems in minutes instead of hours.- Causes dropped calls and poor Quality of Experience (QoE)
 
-- Requires predictive and proactive load balancing
+**TRACE solves this** by deploying AI agents that continuously monitor, predict issues before they occur, and automatically remediate problems in minutes instead of hours.
+
+| Capability | Description |**✅ JSON File Upload Issue RESOLVED:**  
 
 ---
 
-**During peak traffic:**
+|------------|-------------|The `400 INVALID_ARGUMENT - application/json mimeType not supported` error has been fixed with an automatic conversion patch. See [`JSON_UPLOAD_FIX_COMPLETE.md`](JSON_UPLOAD_FIX_COMPLETE.md) for details.
 
-## 🏗️ Architecture- ML-based agents forecast surges and pre-activate backup cells or antennas
+## 🏗️ Architecture
 
-- Load is balanced across nearby towers to prevent overload
+| **Autonomous Remediation** | AI agents automatically detect and fix network issues |
 
-```- Service continuity and QoE are maintained through real-time coordination
+```
 
-┌─────────────────────────────────────────────────────────────────────┐
+┌─────────────────────────────────────────────────────────────────────┐| **Multi-Agent Orchestration** | 8 specialized agents working collaboratively |---
 
-│                    TRACE MULTI-AGENT SYSTEM                         │### 3. Self-Healing & Resilience
+│                    TRACE MULTI-AGENT SYSTEM                         │
 
-├─────────────────────────────────────────────────────────────────────┤- Failures at any level—agents, servers, or sites—can disrupt service
+├─────────────────────────────────────────────────────────────────────┤| **Real-time Monitoring** | Live telemetry streaming and visualization |
 
-│                                                                     │- Requires autonomous recovery and fault tolerance
+│                                                                     │
 
-│                      ┌─────────────────────┐                        │
+│                      ┌─────────────────────┐                        │| **Self-Healing Network** | Automatic recovery from failures with minimal human intervention |## 📋 Summary
 
-│                      │   PRINCIPAL AGENT   │                        │**TRACE introduces self-healing through a hierarchical Principal Agent structure:**
+│                      │   PRINCIPAL AGENT   │                        │
 
-│                      │   (Orchestrator)    │                        │- Monitors agent and infrastructure health continuously
+│                      │   (Orchestrator)    │                        │| **Energy Optimization** | Intelligent power management during low-demand periods |
 
-│                      └──────────┬──────────┘                        │- Diagnoses root causes and executes recovery workflows (restarts, redeploys, reroutes)
+│                      └──────────┬──────────┘                        │
 
-│                                 │                                   │- Applies policy-driven rollback and restoration with operator visibility and auditability
+│                                 │                                   │TRACE is an agentic multi-agent system that cuts mobile-tower energy use by 30–40% during low demand and prevents congestion during traffic surges by coordinating Agent-to-Agent (A2A) communication via Model Context Protocol (MCP), leveraging Amazon Bedrock AgentCore and implementing intelligent cloud-edge control using Google's Agent Development Kit (ADK).
 
 │            ┌────────────────────┼────────────────────┐              │
 
-│            ▼                    ▼                    ▼              │This framework ensures **energy efficiency**, **congestion resilience**, and **autonomous recovery** for modern RAN (Radio Access Network) systems.
+│            ▼                    ▼                    ▼              │---
 
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     │
 
@@ -130,129 +130,384 @@ Modern mobile networks face three major challenges:
 
 │  │  COORDINATOR A  │  │  COORDINATOR B  │  │     xApp        │     │
 
-│  └────────┬────────┘  └────────┬────────┘  └─────────────────┘     │## 🏗️ Proposed Solution
+│  └────────┬────────┘  └────────┬────────┘  └─────────────────┘     │## 🎯 Problem Statement
 
 │           │                    │                                    │
 
-│  ┌────────┴────────────────────┴────────┐                          │TRACE employs a **hierarchical multi-agent architecture** built with Google's Agent Development Kit (ADK):
+│  ┌────────┴────────────────────┴────────┐                          │## 🎯 Problem Statement
 
 │  │           EDGE AGENTS                 │                          │
 
-│  ├───────────┬───────────┬──────────────┤                          │### Agent Hierarchy
+│  ├───────────┬───────────┬──────────────┤                          │Modern telecom operators face critical challenges:
 
 │  │ MONITORING│ PREDICTION│    ACTION    │                          │
 
-│  │   Agent   │   Agent   │    Agent     │                          │#### 🎖️ Principal (Self-Healing) Agent
+│  │   Agent   │   Agent   │    Agent     │                          │Modern mobile networks face three major challenges:
 
-│  └───────────┴───────────┴──────────────┘                          │**Role**: Global orchestrator and system health guardian
+│  └───────────┴───────────┴──────────────┘                          │
 
-│                      │                                              │
+│                      │                                              │| Challenge | Impact |
 
-│           ┌──────────┴──────────┐                                  │**Responsibilities:**
+│           ┌──────────┴──────────┐                                  │
 
-│           │   LEARNING AGENT    │                                  │- Monitors all Parent and Child agents
+│           │   LEARNING AGENT    │                                  │|-----------|--------|### 1. Energy Inefficiency
 
-│           └─────────────────────┘                                  │- Detects anomalies, infrastructure failures, and cascading faults using telemetry + A2A heartbeats
+│           └─────────────────────┘                                  │
 
-│                                                                     │- Executes safe automated remediations (restart, redeploy, reroute) via Amazon Bedrock AgentCore and A2A
+│                                                                     │| **Network Complexity** | 5G/O-RAN architectures increased network elements by 10x |- Towers consume power continuously, even during low traffic hours
 
-└─────────────────────────────────────────────────────────────────────┘- Provides dashboards, rollback capabilities, and human-in-the-loop overrides
+└─────────────────────────────────────────────────────────────────────┘
 
-```- Maintains system-wide policy enforcement
+```| **Reactive Operations** | 73% of outages detected by customers before NOC teams |- Results in high energy costs and carbon emissions
 
 
 
-### Agent Responsibilities**Communication:**
+### Agent Responsibilities| **Slow Resolution** | Average Mean Time to Repair (MTTR) is 4-6 hours |- Idle transmitters and radios remain active without demand-aware control
 
-- Agents communicate securely via Google A2A protocol
 
-| Agent | Role | Responsibilities |- Share context through Model Context Protocol (MCP)
 
-|-------|------|------------------|- Run on AWS Bedrock AgentCore, Strands SDK, and SageMaker/Kinesis for data streams and model serving
+| Agent | Role | Responsibilities || **Skill Shortage** | 40% global shortage of trained network engineers |
 
-| **Principal Agent** | Global Orchestrator | Cross-region coordination, escalation management, strategic decisions |
+|-------|------|------------------|
 
-| **Regional Coordinator** | Regional Manager | Cluster management, resource allocation, local optimization |#### 🏢 Parent Agents (Regional Coordinators)
+| **Principal Agent** | Global Orchestrator | Cross-region coordination, escalation management, strategic decisions || **Revenue Loss** | $1-5M lost per hour of network downtime |### 2. Network Congestion During High Demand
 
-| **Monitoring Agent** | Observability | Telemetry processing, anomaly detection, health scoring |**Role**: Manage regional clusters and intermediate orchestration
+| **Regional Coordinator** | Regional Manager | Cluster management, resource allocation, local optimization |
+
+| **Monitoring Agent** | Observability | Telemetry processing, anomaly detection, health scoring |- Events like concerts, festivals, or emergencies overload specific towers
 
 | **Prediction Agent** | Forecasting | ML-based predictions, capacity planning, trend analysis |
 
-| **Decision xApp** | Policy Engine | Root cause analysis, action recommendations, risk assessment |**Responsibilities:**
+| **Decision xApp** | Policy Engine | Root cause analysis, action recommendations, risk assessment |**TRACE solves this** by deploying AI agents that continuously monitor, predict issues before they occur, and automatically remediate problems in minutes instead of hours.- Causes dropped calls and poor Quality of Experience (QoE)
 
-| **Action Agent** | Executor | Remediation execution, configuration changes, service restarts |- Manage regional tower clusters
+| **Action Agent** | Executor | Remediation execution, configuration changes, service restarts |
 
-| **Learning Agent** | Intelligence | Pattern recognition, playbook optimization, knowledge retention |- Aggregate telemetry from Edge Child Agents
-
-- Enforce regional policies
-
----- Perform quick remediation at cluster level
-
-- Balance load across multiple towers in region
-
-## ☁️ AWS Services Used- Report to Principal Agent
+| **Learning Agent** | Intelligence | Pattern recognition, playbook optimization, knowledge retention |- Requires predictive and proactive load balancing
 
 
 
-### Core Services#### 🔧 Edge Child Agents (Tower-Level Specialists)
+------
 
 
 
-| Service | Purpose |##### 1. Monitoring Agent
-
-|---------|---------|**Purpose**: Real-time data collection and streaming
-
-| **Amazon Bedrock** | Foundation models (Claude 3 Sonnet) for all 8 AI agents |
-
-| **AWS Lambda** | Serverless functions for agent tools (health monitor, remediation, telemetry) |**Functions:**
-
-| **Amazon DynamoDB** | Data storage (Tower Config, Agent Status, Remediation Logs, Session Memory) |- Streams RAN Key Performance Indicators (KPIs)
-
-| **Amazon API Gateway** | REST API endpoints (`/health`, `/agent`, `/remediate`, `/dashboard`) |- Collects power consumption metrics
-
-| **Amazon S3** | Static website hosting, telemetry storage, knowledge base |- Monitors tower health indicators
-
-| **Amazon CloudFront** | Global CDN for dashboard delivery |- Tracks environmental conditions
-
-| **AWS IAM** | Security roles and permissions |- Sends telemetry to Parent Agent
+## ☁️ AWS Services Used**During peak traffic:**
 
 
 
-### Infrastructure##### 2. Prediction Agent
+| Service | Purpose |## 🏗️ Architecture- ML-based agents forecast surges and pre-activate backup cells or antennas
 
-**Purpose**: Forecasting and demand prediction
+|---------|---------|
 
-| Resource | Name/ID |
+| **Amazon Bedrock** | Foundation models (Claude 3 Sonnet) for all 8 AI agents |- Load is balanced across nearby towers to prevent overload
 
-|----------|---------|**Functions:**
+| **AWS Lambda** | Serverless functions for agent tools |
 
-| API Gateway | `dcruqmbqjc.execute-api.us-east-1.amazonaws.com/dev` |- Short-term load forecasting using hybrid rule + ML models
+| **Amazon DynamoDB** | Data storage for tower config, agent status, remediation logs |```- Service continuity and QoE are maintained through real-time coordination
 
-| CloudFront | `d1cmtnu8ims6nq.cloudfront.net` |- Traffic pattern analysis
+| **Amazon API Gateway** | REST API endpoints |
 
-| S3 Frontend | `trace-frontend-382114757306-dev` |- Event detection and prediction
+| **Amazon S3** | Static website hosting and storage |┌─────────────────────────────────────────────────────────────────────┐
 
-| DynamoDB Tables | `TRACE-TowerConfig-dev`, `TRACE-AgentStatus-dev`, `TRACE-RemediationLog-dev`, `TRACE-SessionMemory-dev` |- Peak demand forecasting
+| **Amazon CloudFront** | Global CDN for dashboard |
 
-- Anomaly prediction
+| **AWS IAM** | Security roles and permissions |│                    TRACE MULTI-AGENT SYSTEM                         │### 3. Self-Healing & Resilience
 
-### Deployed Agents
 
-##### 3. Decision xApp Agent
 
-| Agent | Bedrock Agent ID | Status |**Purpose**: Policy-based decision making
+### Deployed Agents├─────────────────────────────────────────────────────────────────────┤- Failures at any level—agents, servers, or sites—can disrupt service
+
+
+
+| Agent | Bedrock Agent ID | Status |│                                                                     │- Requires autonomous recovery and fault tolerance
 
 |-------|------------------|--------|
 
-| Principal Agent | `N3LVTOXSFA` | ✅ PREPARED |**Functions:**
+| Principal Agent | `N3LVTOXSFA` | ✅ PREPARED |│                      ┌─────────────────────┐                        │
 
-| Regional Coordinator A | `A1AK7SJQF6` | ✅ PREPARED |- Policy engine for safe control actions (via A2A)
+| Regional Coordinator A | `A1AK7SJQF6` | ✅ PREPARED |
 
-| Regional Coordinator B | `JPA17IHQ0V` | ✅ PREPARED |- Energy optimization decision logic
+| Regional Coordinator B | `JPA17IHQ0V` | ✅ PREPARED |│                      │   PRINCIPAL AGENT   │                        │**TRACE introduces self-healing through a hierarchical Principal Agent structure:**
 
-| Decision xApp | `N2EGAGVLEM` | ✅ PREPARED |- Congestion avoidance strategies
+| Decision xApp | `N2EGAGVLEM` | ✅ PREPARED |
 
-| Monitoring Agent | `ERZO1UFKHQ` | ✅ PREPARED |- Resource allocation decisions
+| Monitoring Agent | `ERZO1UFKHQ` | ✅ PREPARED |│                      │   (Orchestrator)    │                        │- Monitors agent and infrastructure health continuously
+
+| Prediction Agent | `LS0OWPC30J` | ✅ PREPARED |
+
+| Action Agent | `PNZVYMD3MH` | ✅ PREPARED |│                      └──────────┬──────────┘                        │- Diagnoses root causes and executes recovery workflows (restarts, redeploys, reroutes)
+
+| Learning Agent | `EHBDSQWYHB` | ✅ PREPARED |
+
+│                                 │                                   │- Applies policy-driven rollback and restoration with operator visibility and auditability
+
+---
+
+│            ┌────────────────────┼────────────────────┐              │
+
+## 🚀 Quick Start
+
+│            ▼                    ▼                    ▼              │This framework ensures **energy efficiency**, **congestion resilience**, and **autonomous recovery** for modern RAN (Radio Access Network) systems.
+
+### Prerequisites
+
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐     │
+
+- AWS Account with Bedrock access
+
+- Python 3.12+│  │   REGIONAL      │  │   REGIONAL      │  │   DECISION      │     │---
+
+- Node.js 18+
+
+- AWS CLI configured│  │  COORDINATOR A  │  │  COORDINATOR B  │  │     xApp        │     │
+
+
+
+### 1. Clone Repository│  └────────┬────────┘  └────────┬────────┘  └─────────────────┘     │## 🏗️ Proposed Solution
+
+
+
+```bash│           │                    │                                    │
+
+git clone https://github.com/ramyabarri1109-a11y/trace.git
+
+cd trace│  ┌────────┴────────────────────┴────────┐                          │TRACE employs a **hierarchical multi-agent architecture** built with Google's Agent Development Kit (ADK):
+
+```
+
+│  │           EDGE AGENTS                 │                          │
+
+### 2. Deploy AWS Infrastructure
+
+│  ├───────────┬───────────┬──────────────┤                          │### Agent Hierarchy
+
+```bash
+
+cd aws-implementation│  │ MONITORING│ PREDICTION│    ACTION    │                          │
+
+pip install -r requirements.txt
+
+│  │   Agent   │   Agent   │    Agent     │                          │#### 🎖️ Principal (Self-Healing) Agent
+
+# Deploy in order
+
+python 01-infrastructure/setup-infrastructure.py│  └───────────┴───────────┴──────────────┘                          │**Role**: Global orchestrator and system health guardian
+
+python 04-agent-tools/deploy-tools.py
+
+python 05-bedrock-agents/deploy-agents.py│                      │                                              │
+
+python 07-api-gateway/deploy-api.py
+
+python 08-frontend/deploy-frontend.py│           ┌──────────┴──────────┐                                  │**Responsibilities:**
+
+```
+
+│           │   LEARNING AGENT    │                                  │- Monitors all Parent and Child agents
+
+### 3. Run Dashboard Locally
+
+│           └─────────────────────┘                                  │- Detects anomalies, infrastructure failures, and cascading faults using telemetry + A2A heartbeats
+
+```bash
+
+cd client│                                                                     │- Executes safe automated remediations (restart, redeploy, reroute) via Amazon Bedrock AgentCore and A2A
+
+npm install
+
+npm run dev└─────────────────────────────────────────────────────────────────────┘- Provides dashboards, rollback capabilities, and human-in-the-loop overrides
+
+# Open http://localhost:5173
+
+``````- Maintains system-wide policy enforcement
+
+
+
+### 4. Access Live Dashboard
+
+
+
+**Production URL:** https://d1cmtnu8ims6nq.cloudfront.net### Agent Responsibilities**Communication:**
+
+
+
+---- Agents communicate securely via Google A2A protocol
+
+
+
+## 📊 Dashboard Features| Agent | Role | Responsibilities |- Share context through Model Context Protocol (MCP)
+
+
+
+- **Real-time Telemetry** - Live CPU, Memory, Latency metrics|-------|------|------------------|- Run on AWS Bedrock AgentCore, Strands SDK, and SageMaker/Kinesis for data streams and model serving
+
+- **Issue Command Center** - Auto-detected issues with AI remediation
+
+- **Agent Pipeline** - Visual flow: Monitoring → Prediction → Decision → Action → Learning| **Principal Agent** | Global Orchestrator | Cross-region coordination, escalation management, strategic decisions |
+
+- **Chat Interface** - Natural language interaction with AI agents
+
+| **Regional Coordinator** | Regional Manager | Cluster management, resource allocation, local optimization |#### 🏢 Parent Agents (Regional Coordinators)
+
+---
+
+| **Monitoring Agent** | Observability | Telemetry processing, anomaly detection, health scoring |**Role**: Manage regional clusters and intermediate orchestration
+
+## 📁 Project Structure
+
+| **Prediction Agent** | Forecasting | ML-based predictions, capacity planning, trend analysis |
+
+```
+
+trace/| **Decision xApp** | Policy Engine | Root cause analysis, action recommendations, risk assessment |**Responsibilities:**
+
+├── aws-implementation/          # AWS deployment scripts
+
+│   ├── 01-infrastructure/       # DynamoDB, S3, IAM| **Action Agent** | Executor | Remediation execution, configuration changes, service restarts |- Manage regional tower clusters
+
+│   ├── 04-agent-tools/          # Lambda functions
+
+│   ├── 05-bedrock-agents/       # Agent definitions| **Learning Agent** | Intelligence | Pattern recognition, playbook optimization, knowledge retention |- Aggregate telemetry from Edge Child Agents
+
+│   ├── 07-api-gateway/          # API endpoints
+
+│   └── 08-frontend/             # Frontend deployment- Enforce regional policies
+
+│
+
+├── client/                      # React dashboard---- Perform quick remediation at cluster level
+
+│   └── src/
+
+│       ├── components/          # UI components- Balance load across multiple towers in region
+
+│       └── services/            # API & WebSocket
+
+│## ☁️ AWS Services Used- Report to Principal Agent
+
+├── data/                        # Sample telemetry
+
+├── figures/                     # Architecture diagrams
+
+└── principal_agent/             # Reference implementation
+
+```### Core Services#### 🔧 Edge Child Agents (Tower-Level Specialists)
+
+
+
+---
+
+
+
+## 🛠️ Technology Stack| Service | Purpose |##### 1. Monitoring Agent
+
+
+
+### Backend|---------|---------|**Purpose**: Real-time data collection and streaming
+
+- Python 3.12
+
+- Amazon Bedrock (Claude 3 Sonnet)| **Amazon Bedrock** | Foundation models (Claude 3 Sonnet) for all 8 AI agents |
+
+- AWS Lambda
+
+- DynamoDB| **AWS Lambda** | Serverless functions for agent tools (health monitor, remediation, telemetry) |**Functions:**
+
+
+
+### Frontend| **Amazon DynamoDB** | Data storage (Tower Config, Agent Status, Remediation Logs, Session Memory) |- Streams RAN Key Performance Indicators (KPIs)
+
+- React 18
+
+- Vite| **Amazon API Gateway** | REST API endpoints (`/health`, `/agent`, `/remediate`, `/dashboard`) |- Collects power consumption metrics
+
+- Material-UI
+
+- Recharts| **Amazon S3** | Static website hosting, telemetry storage, knowledge base |- Monitors tower health indicators
+
+
+
+### Infrastructure| **Amazon CloudFront** | Global CDN for dashboard delivery |- Tracks environmental conditions
+
+- S3 + CloudFront
+
+- API Gateway| **AWS IAM** | Security roles and permissions |- Sends telemetry to Parent Agent
+
+- IAM
+
+
+
+---
+
+### Infrastructure##### 2. Prediction Agent
+
+## 📈 Business Outcomes
+
+**Purpose**: Forecasting and demand prediction
+
+| Metric | Before | After | Improvement |
+
+|--------|--------|-------|-------------|| Resource | Name/ID |
+
+| Mean Time to Detect | 30-60 min | < 30 sec | **99% faster** |
+
+| Mean Time to Repair | 4-6 hours | 5-15 min | **95% faster** ||----------|---------|**Functions:**
+
+| Autonomous Resolution | 0% | 82% | **New capability** |
+
+| Network Availability | 99.5% | 99.99% | **+0.49%** || API Gateway | `dcruqmbqjc.execute-api.us-east-1.amazonaws.com/dev` |- Short-term load forecasting using hybrid rule + ML models
+
+
+
+---| CloudFront | `d1cmtnu8ims6nq.cloudfront.net` |- Traffic pattern analysis
+
+
+
+## 👥 Team| S3 Frontend | `trace-frontend-382114757306-dev` |- Event detection and prediction
+
+
+
+- Vinay Dangeti| DynamoDB Tables | `TRACE-TowerConfig-dev`, `TRACE-AgentStatus-dev`, `TRACE-RemediationLog-dev`, `TRACE-SessionMemory-dev` |- Peak demand forecasting
+
+- Sudeep Aryan
+
+- G S Neelam- Anomaly prediction
+
+- Ramya
+
+- Aishwarya### Deployed Agents
+
+
+
+**Contact:** sudeeparyang@gmail.com##### 3. Decision xApp Agent
+
+
+
+---| Agent | Bedrock Agent ID | Status |**Purpose**: Policy-based decision making
+
+
+
+## 📄 License|-------|------------------|--------|
+
+
+
+MIT License| Principal Agent | `N3LVTOXSFA` | ✅ PREPARED |**Functions:**
+
+
+
+---| Regional Coordinator A | `A1AK7SJQF6` | ✅ PREPARED |- Policy engine for safe control actions (via A2A)
+
+
+
+<div align="center">| Regional Coordinator B | `JPA17IHQ0V` | ✅ PREPARED |- Energy optimization decision logic
+
+
+
+**Built with ❤️ using Amazon Bedrock**| Decision xApp | `N2EGAGVLEM` | ✅ PREPARED |- Congestion avoidance strategies
+
+
+
+</div>| Monitoring Agent | `ERZO1UFKHQ` | ✅ PREPARED |- Resource allocation decisions
+
 
 | Prediction Agent | `LS0OWPC30J` | ✅ PREPARED |- Safety constraint enforcement
 
