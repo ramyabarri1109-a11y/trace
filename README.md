@@ -17,23 +17,23 @@
 
 ## 📋 Table of Contents
 
-- [Overview](#-overview)
-- [Features](#-features)
-- [Problem Statement](#-problem-statement)
-- [Architecture](#-architecture)
-- [AWS Services](#-aws-services)
-- [Quick Start](#-quick-start)
+- [Overview](#overview)
+- [Features](#features)
+- [Problem Statement](#problem-statement)
+- [Architecture](#architecture)
+- [AWS Services](#aws-services)
+- [Quick Start](#quick-start)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running Locally](#running-locally)
-- [Dashboard](#-dashboard)
-- [Project Structure](#-project-structure)
-- [Technology Stack](#-technology-stack)
-- [Business Outcomes](#-business-outcomes)
-- [Contributing](#-contributing)
-- [Team](#-team)
-- [License](#-license)
-- [Support](#-support)
+- [Dashboard](#dashboard)
+- [Project Structure](#project-structure)
+- [Technology Stack](#technology-stack)
+- [Business Outcomes](#business-outcomes)
+- [Contributing](#contributing)
+- [Team](#team)
+- [License](#license)
+- [Support](#support)
 
 ---
 
