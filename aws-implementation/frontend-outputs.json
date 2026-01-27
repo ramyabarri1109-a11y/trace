@@ -1,0 +1,12 @@
+{
+  "s3": {
+    "bucket": "trace-frontend-382114757306-dev",
+    "url": "http://trace-frontend-382114757306-dev.s3-website-us-east-1.amazonaws.com",
+    "files_uploaded": 3
+  },
+  "cloudfront": {
+    "distribution_id": "E1HWDWULM338KR",
+    "domain_name": "d1cmtnu8ims6nq.cloudfront.net",
+    "url": "https://d1cmtnu8ims6nq.cloudfront.net"
+  }
+}

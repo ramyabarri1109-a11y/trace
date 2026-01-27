@@ -1,0 +1,15 @@
+{
+  "sns_topic_arn": "arn:aws:sns:us-east-1:382114757306:TRACE-Notifications-dev",
+  "state_machines": [
+    {
+      "name": "TRACE-SelfHealing-dev",
+      "arn": "arn:aws:states:us-east-1:382114757306:stateMachine:TRACE-SelfHealing-dev",
+      "status": "created"
+    },
+    {
+      "name": "TRACE-EnergyOptimization-dev",
+      "arn": "arn:aws:states:us-east-1:382114757306:stateMachine:TRACE-EnergyOptimization-dev",
+      "status": "created"
+    }
+  ]
+}

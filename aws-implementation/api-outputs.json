@@ -1,0 +1,7 @@
+{
+  "lambda_arn": "arn:aws:lambda:us-east-1:382114757306:function:TRACE-APIHandler-dev",
+  "rest_api": {
+    "api_id": "dcruqmbqjc",
+    "api_url": "https://dcruqmbqjc.execute-api.us-east-1.amazonaws.com/dev"
+  }
+}

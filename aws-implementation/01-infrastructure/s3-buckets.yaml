@@ -1,0 +1,194 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'TRACE - S3 Buckets'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+
+Resources:
+  # ===========================================
+  # Telemetry Data Bucket
+  # ===========================================
+  TelemetryBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'trace-telemetry-${AWS::AccountId}-${Environment}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      LifecycleConfiguration:
+        Rules:
+          - Id: TransitionToIA
+            Status: Enabled
+            Transitions:
+              - StorageClass: STANDARD_IA
+                TransitionInDays: 30
+          - Id: ExpireOldVersions
+            Status: Enabled
+            NoncurrentVersionExpiration:
+              NoncurrentDays: 90
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Knowledge Base Bucket (for Bedrock RAG)
+  # ===========================================
+  KnowledgeBaseBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'trace-knowledge-base-${AWS::AccountId}-${Environment}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      CorsConfiguration:
+        CorsRules:
+          - AllowedHeaders: ['*']
+            AllowedMethods: [GET, PUT]
+            AllowedOrigins: ['*']
+            MaxAge: 3000
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # ML Models Bucket
+  # ===========================================
+  ModelsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'trace-models-${AWS::AccountId}-${Environment}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Lambda Code Bucket
+  # ===========================================
+  LambdaCodeBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'trace-lambda-code-${AWS::AccountId}-${Environment}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Frontend Assets Bucket (for CloudFront)
+  # ===========================================
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub 'trace-frontend-${AWS::AccountId}-${Environment}'
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: index.html
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: false
+        BlockPublicPolicy: false
+        IgnorePublicAcls: false
+        RestrictPublicBuckets: false
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  FrontendBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref FrontendBucket
+      PolicyDocument:
+        Statement:
+          - Sid: PublicReadGetObject
+            Effect: Allow
+            Principal: '*'
+            Action: s3:GetObject
+            Resource: !Sub '${FrontendBucket.Arn}/*'
+
+Outputs:
+  TelemetryBucketName:
+    Description: Telemetry Bucket Name
+    Value: !Ref TelemetryBucket
+    Export:
+      Name: !Sub 'TRACE-Telemetry-Bucket-${Environment}'
+
+  KnowledgeBaseBucketName:
+    Description: Knowledge Base Bucket Name
+    Value: !Ref KnowledgeBaseBucket
+    Export:
+      Name: !Sub 'TRACE-KnowledgeBase-Bucket-${Environment}'
+
+  ModelsBucketName:
+    Description: Models Bucket Name
+    Value: !Ref ModelsBucket
+    Export:
+      Name: !Sub 'TRACE-Models-Bucket-${Environment}'
+
+  LambdaCodeBucketName:
+    Description: Lambda Code Bucket Name
+    Value: !Ref LambdaCodeBucket
+    Export:
+      Name: !Sub 'TRACE-LambdaCode-Bucket-${Environment}'
+
+  FrontendBucketName:
+    Description: Frontend Bucket Name
+    Value: !Ref FrontendBucket
+    Export:
+      Name: !Sub 'TRACE-Frontend-Bucket-${Environment}'
+
+  FrontendBucketWebsiteURL:
+    Description: Frontend Website URL
+    Value: !GetAtt FrontendBucket.WebsiteURL
+    Export:
+      Name: !Sub 'TRACE-Frontend-URL-${Environment}'

@@ -1,0 +1,218 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TRACE Remediation API",
+    "version": "1.0.0",
+    "description": "API for executing remediation actions in TRACE system"
+  },
+  "paths": {
+    "/restart-agent": {
+      "post": {
+        "operationId": "restart_agent",
+        "summary": "Restart a specific agent",
+        "description": "Restarts an agent that is unhealthy or unresponsive. Use this for soft recovery.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "agent_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the agent to restart"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "Reason for restart (e.g., health_check_failure, high_error_rate)"
+                  }
+                },
+                "required": ["agent_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Restart operation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {"type": "boolean"},
+                    "message": {"type": "string"},
+                    "estimated_recovery_time": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redeploy-agent": {
+      "post": {
+        "operationId": "redeploy_agent",
+        "summary": "Redeploy an agent with fresh instance",
+        "description": "Performs a complete redeployment of an agent. Use when restart fails or for upgrades.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "agent_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the agent to redeploy"
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Version to deploy (default: latest)"
+                  }
+                },
+                "required": ["agent_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Redeployment result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reroute-traffic": {
+      "post": {
+        "operationId": "reroute_traffic",
+        "summary": "Reroute traffic between towers",
+        "description": "Reroutes traffic from an overloaded or failing tower to a healthy one.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "source_tower": {
+                    "type": "string",
+                    "description": "Tower to reroute traffic FROM"
+                  },
+                  "target_tower": {
+                    "type": "string",
+                    "description": "Tower to reroute traffic TO"
+                  },
+                  "percentage": {
+                    "type": "integer",
+                    "description": "Percentage of traffic to reroute (1-100)"
+                  }
+                },
+                "required": ["source_tower", "target_tower"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reroute operation result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/execute-action": {
+      "post": {
+        "operationId": "execute_action",
+        "summary": "Execute a tower control action",
+        "description": "Executes actions like shutting down TRX for energy savings or activating backup capacity.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tower_id": {
+                    "type": "string",
+                    "description": "Tower to execute action on"
+                  },
+                  "action_type": {
+                    "type": "string",
+                    "enum": ["shutdown_trx", "activate_trx", "adjust_power", "enable_backup", "disable_backup"],
+                    "description": "Type of action to execute"
+                  },
+                  "action_params": {
+                    "type": "object",
+                    "description": "Additional parameters for the action"
+                  }
+                },
+                "required": ["tower_id", "action_type"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Action execution result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rollback-change": {
+      "post": {
+        "operationId": "rollback_change",
+        "summary": "Rollback a previous change",
+        "description": "Rolls back a configuration change to restore previous state.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "change_id": {
+                    "type": "string",
+                    "description": "ID of the change to rollback"
+                  },
+                  "component": {
+                    "type": "string",
+                    "description": "Component to rollback (if change_id not known)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Rollback result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

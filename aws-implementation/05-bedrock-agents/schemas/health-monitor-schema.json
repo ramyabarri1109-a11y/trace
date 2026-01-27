@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "TRACE Health Monitor API",
+    "version": "1.0.0",
+    "description": "API for monitoring TRACE system health"
+  },
+  "paths": {
+    "/check-system-health": {
+      "post": {
+        "operationId": "check_system_health",
+        "summary": "Check overall system health",
+        "description": "Checks the health of all agents, infrastructure, and returns overall system status with any detected issues.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {}
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "System health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "overall_status": {
+                      "type": "string",
+                      "enum": ["healthy", "degraded", "critical"]
+                    },
+                    "health_score": {
+                      "type": "number"
+                    },
+                    "issues": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "recommendations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-agent-status": {
+      "post": {
+        "operationId": "get_agent_status",
+        "summary": "Get status of a specific agent",
+        "description": "Returns detailed status information for a specific agent including uptime, error rate, and recent activity.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "agent_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the agent to check"
+                  }
+                },
+                "required": ["agent_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent status details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "agent_id": {"type": "string"},
+                    "status": {"type": "string"},
+                    "last_heartbeat": {"type": "string"},
+                    "metrics": {"type": "object"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-tower-health": {
+      "post": {
+        "operationId": "get_tower_health",
+        "summary": "Get health status of a specific tower",
+        "description": "Returns health metrics for a specific tower including utilization, latency, and any issues.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "tower_id": {
+                    "type": "string",
+                    "description": "The unique identifier of the tower (e.g., TX001)"
+                  }
+                },
+                "required": ["tower_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tower health details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/get-regional-health": {
+      "post": {
+        "operationId": "get_regional_health",
+        "summary": "Get health status of a region",
+        "description": "Returns aggregated health metrics for all towers in a specific region.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "region_id": {
+                    "type": "string",
+                    "description": "The region identifier (e.g., R-E, R-C)"
+                  }
+                },
+                "required": ["region_id"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Regional health details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

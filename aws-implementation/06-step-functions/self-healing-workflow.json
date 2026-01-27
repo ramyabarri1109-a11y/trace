@@ -1,0 +1,283 @@
+{
+  "Comment": "TRACE Self-Healing Workflow - Automated detection and remediation of system issues",
+  "StartAt": "ClassifyIssue",
+  "States": {
+    "ClassifyIssue": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.severity",
+          "StringEquals": "critical",
+          "Next": "CriticalIssueHandler"
+        },
+        {
+          "Variable": "$.severity",
+          "StringEquals": "warning",
+          "Next": "WarningIssueHandler"
+        },
+        {
+          "Variable": "$.issue_type",
+          "StringEquals": "agent_unhealthy",
+          "Next": "AgentHealthHandler"
+        },
+        {
+          "Variable": "$.issue_type",
+          "StringEquals": "tower_overload",
+          "Next": "TowerOverloadHandler"
+        }
+      ],
+      "Default": "LogAndMonitor"
+    },
+
+    "CriticalIssueHandler": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "NotifyCritical",
+          "States": {
+            "NotifyCritical": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::sns:publish",
+              "Parameters": {
+                "TopicArn.$": "$.notification_topic",
+                "Message.$": "States.Format('CRITICAL: {} detected on {}', $.issue_type, $.component)",
+                "Subject": "TRACE Critical Alert"
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "AttemptRemediation",
+          "States": {
+            "AttemptRemediation": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": "TRACE-Remediation-${Environment}",
+                "Payload": {
+                  "action": "restart_agent",
+                  "parameters": {
+                    "agent_id.$": "$.agent_id",
+                    "reason": "critical_failure"
+                  }
+                }
+              },
+              "ResultPath": "$.remediation_result",
+              "End": true
+            }
+          }
+        }
+      ],
+      "ResultPath": "$.parallel_results",
+      "Next": "VerifyRecovery"
+    },
+
+    "WarningIssueHandler": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-HealthMonitor-${Environment}",
+        "Payload": {
+          "action": "get_agent_status",
+          "parameters": {
+            "agent_id.$": "$.agent_id"
+          }
+        }
+      },
+      "ResultPath": "$.health_check",
+      "Next": "EvaluateWarning"
+    },
+
+    "EvaluateWarning": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.health_check.Payload.body.status",
+          "StringEquals": "healthy",
+          "Next": "LogAndMonitor"
+        },
+        {
+          "Variable": "$.health_check.Payload.body.status",
+          "StringEquals": "critical",
+          "Next": "CriticalIssueHandler"
+        }
+      ],
+      "Default": "ScheduleRecheck"
+    },
+
+    "ScheduleRecheck": {
+      "Type": "Wait",
+      "Seconds": 300,
+      "Next": "RecheckHealth"
+    },
+
+    "RecheckHealth": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-HealthMonitor-${Environment}",
+        "Payload": {
+          "action": "get_agent_status",
+          "parameters": {
+            "agent_id.$": "$.agent_id"
+          }
+        }
+      },
+      "ResultPath": "$.recheck_result",
+      "Next": "EvaluateRecheck"
+    },
+
+    "EvaluateRecheck": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.recheck_result.Payload.body.status",
+          "StringEquals": "healthy",
+          "Next": "LogAndMonitor"
+        }
+      ],
+      "Default": "EscalateToRestart"
+    },
+
+    "EscalateToRestart": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-Remediation-${Environment}",
+        "Payload": {
+          "action": "restart_agent",
+          "parameters": {
+            "agent_id.$": "$.agent_id",
+            "reason": "warning_escalated"
+          }
+        }
+      },
+      "ResultPath": "$.restart_result",
+      "Next": "VerifyRecovery"
+    },
+
+    "AgentHealthHandler": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-Remediation-${Environment}",
+        "Payload": {
+          "action": "restart_agent",
+          "parameters": {
+            "agent_id.$": "$.agent_id",
+            "reason.$": "$.issue_type"
+          }
+        }
+      },
+      "ResultPath": "$.restart_result",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 30,
+          "MaxAttempts": 2,
+          "BackoffRate": 2
+        }
+      ],
+      "Next": "VerifyRecovery"
+    },
+
+    "TowerOverloadHandler": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-Remediation-${Environment}",
+        "Payload": {
+          "action": "reroute_traffic",
+          "parameters": {
+            "source_tower.$": "$.tower_id",
+            "target_tower.$": "$.target_tower",
+            "percentage": 50
+          }
+        }
+      },
+      "ResultPath": "$.reroute_result",
+      "Next": "VerifyRecovery"
+    },
+
+    "VerifyRecovery": {
+      "Type": "Wait",
+      "Seconds": 30,
+      "Next": "CheckRecoveryStatus"
+    },
+
+    "CheckRecoveryStatus": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-HealthMonitor-${Environment}",
+        "Payload": {
+          "action": "check_system_health",
+          "parameters": {}
+        }
+      },
+      "ResultPath": "$.recovery_check",
+      "Next": "EvaluateRecovery"
+    },
+
+    "EvaluateRecovery": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.recovery_check.Payload.body.overall_status",
+          "StringEquals": "healthy",
+          "Next": "RecoverySuccess"
+        }
+      ],
+      "Default": "RecoveryFailed"
+    },
+
+    "RecoverySuccess": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn.$": "$.notification_topic",
+        "Message": "TRACE Self-Healing: Issue resolved successfully",
+        "Subject": "TRACE Recovery Success"
+      },
+      "Next": "LogAndMonitor"
+    },
+
+    "RecoveryFailed": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn.$": "$.notification_topic",
+        "Message.$": "States.Format('TRACE Self-Healing: Automated recovery failed for {}. Manual intervention required.', $.agent_id)",
+        "Subject": "TRACE Recovery Failed - Action Required"
+      },
+      "Next": "LogAndMonitor"
+    },
+
+    "LogAndMonitor": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::dynamodb:putItem",
+      "Parameters": {
+        "TableName": "TRACE-RemediationLog-${Environment}",
+        "Item": {
+          "remediation_id": {
+            "S.$": "States.UUID()"
+          },
+          "timestamp": {
+            "S.$": "$$.State.EnteredTime"
+          },
+          "issue_type": {
+            "S.$": "$.issue_type"
+          },
+          "component": {
+            "S.$": "$.agent_id"
+          },
+          "workflow_execution": {
+            "S.$": "$$.Execution.Id"
+          }
+        }
+      },
+      "End": true
+    }
+  }
+}

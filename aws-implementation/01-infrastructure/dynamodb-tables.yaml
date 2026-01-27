@@ -1,0 +1,191 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'TRACE - DynamoDB Tables'
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+
+Resources:
+  # ===========================================
+  # Agent Status Table
+  # ===========================================
+  AgentStatusTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'TRACE-AgentStatus-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: agent_id
+          AttributeType: S
+        - AttributeName: region_id
+          AttributeType: S
+        - AttributeName: last_heartbeat
+          AttributeType: S
+      KeySchema:
+        - AttributeName: agent_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: region-index
+          KeySchema:
+            - AttributeName: region_id
+              KeyType: HASH
+            - AttributeName: last_heartbeat
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Tower Configuration Table
+  # ===========================================
+  TowerConfigTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'TRACE-TowerConfig-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: tower_id
+          AttributeType: S
+        - AttributeName: region_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: tower_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: region-index
+          KeySchema:
+            - AttributeName: region_id
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Remediation Log Table
+  # ===========================================
+  RemediationLogTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'TRACE-RemediationLog-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: remediation_id
+          AttributeType: S
+        - AttributeName: timestamp
+          AttributeType: S
+        - AttributeName: agent_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: remediation_id
+          KeyType: HASH
+        - AttributeName: timestamp
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: agent-index
+          KeySchema:
+            - AttributeName: agent_id
+              KeyType: HASH
+            - AttributeName: timestamp
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Session Memory Table (for agent context)
+  # ===========================================
+  SessionMemoryTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'TRACE-SessionMemory-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: session_id
+          AttributeType: S
+        - AttributeName: message_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: session_id
+          KeyType: HASH
+        - AttributeName: message_id
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+  # ===========================================
+  # Telemetry Aggregates Table
+  # ===========================================
+  TelemetryAggregatesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub 'TRACE-TelemetryAggregates-${Environment}'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: partition_key
+          AttributeType: S
+        - AttributeName: timestamp_hour
+          AttributeType: S
+      KeySchema:
+        - AttributeName: partition_key
+          KeyType: HASH
+        - AttributeName: timestamp_hour
+          KeyType: RANGE
+      TimeToLiveSpecification:
+        AttributeName: ttl
+        Enabled: true
+      Tags:
+        - Key: Project
+          Value: TRACE
+        - Key: Environment
+          Value: !Ref Environment
+
+Outputs:
+  AgentStatusTableName:
+    Description: Agent Status Table Name
+    Value: !Ref AgentStatusTable
+    Export:
+      Name: !Sub 'TRACE-AgentStatus-Table-${Environment}'
+
+  TowerConfigTableName:
+    Description: Tower Config Table Name
+    Value: !Ref TowerConfigTable
+    Export:
+      Name: !Sub 'TRACE-TowerConfig-Table-${Environment}'
+
+  RemediationLogTableName:
+    Description: Remediation Log Table Name
+    Value: !Ref RemediationLogTable
+    Export:
+      Name: !Sub 'TRACE-RemediationLog-Table-${Environment}'
+
+  SessionMemoryTableName:
+    Description: Session Memory Table Name
+    Value: !Ref SessionMemoryTable
+    Export:
+      Name: !Sub 'TRACE-SessionMemory-Table-${Environment}'

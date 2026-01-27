@@ -1,0 +1,271 @@
+{
+  "Comment": "TRACE Energy Optimization Workflow - Coordinates TRX shutdown during low traffic periods",
+  "StartAt": "GetCurrentTrafficLevels",
+  "States": {
+    "GetCurrentTrafficLevels": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-TelemetryQuery-${Environment}",
+        "Payload": {
+          "action": "get_regional_metrics",
+          "parameters": {
+            "region_id.$": "$.region_id"
+          }
+        }
+      },
+      "ResultPath": "$.current_traffic",
+      "Next": "PredictLowTrafficPeriod"
+    },
+
+    "PredictLowTrafficPeriod": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-TrafficPredictor-${Environment}",
+        "Payload": {
+          "region_id.$": "$.region_id",
+          "current_hour.$": "$.current_hour"
+        }
+      },
+      "ResultPath": "$.prediction",
+      "Next": "EvaluatePrediction"
+    },
+
+    "EvaluatePrediction": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.prediction.Payload.body.surge_probability",
+          "NumericLessThan": 0.3,
+          "Next": "IdentifyShutdownCandidates"
+        }
+      ],
+      "Default": "NotSuitableForOptimization"
+    },
+
+    "NotSuitableForOptimization": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Current traffic conditions not suitable for energy optimization",
+        "action_taken": "none"
+      },
+      "ResultPath": "$.optimization_result",
+      "End": true
+    },
+
+    "IdentifyShutdownCandidates": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-TelemetryQuery-${Environment}",
+        "Payload": {
+          "action": "get_regional_metrics",
+          "parameters": {
+            "region_id.$": "$.region_id",
+            "filter": "low_utilization"
+          }
+        }
+      },
+      "ResultPath": "$.shutdown_candidates",
+      "Next": "ValidateShutdownSafety"
+    },
+
+    "ValidateShutdownSafety": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-HealthMonitor-${Environment}",
+        "Payload": {
+          "action": "get_regional_health",
+          "parameters": {
+            "region_id.$": "$.region_id"
+          }
+        }
+      },
+      "ResultPath": "$.safety_check",
+      "Next": "CheckSafetyResult"
+    },
+
+    "CheckSafetyResult": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.safety_check.Payload.body.status",
+          "StringEquals": "healthy",
+          "Next": "ExecuteTRXShutdown"
+        }
+      ],
+      "Default": "AbortOptimization"
+    },
+
+    "AbortOptimization": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Energy optimization aborted due to safety concerns",
+        "action_taken": "none"
+      },
+      "ResultPath": "$.optimization_result",
+      "End": true
+    },
+
+    "ExecuteTRXShutdown": {
+      "Type": "Map",
+      "ItemsPath": "$.towers_to_optimize",
+      "MaxConcurrency": 3,
+      "Parameters": {
+        "tower_id.$": "$$.Map.Item.Value.tower_id",
+        "trx_count.$": "$$.Map.Item.Value.trx_to_shutdown"
+      },
+      "Iterator": {
+        "StartAt": "ShutdownTRX",
+        "States": {
+          "ShutdownTRX": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "TRACE-Remediation-${Environment}",
+              "Payload": {
+                "action": "execute_action",
+                "parameters": {
+                  "tower_id.$": "$.tower_id",
+                  "action_type": "shutdown_trx",
+                  "action_params": {
+                    "trx_count.$": "$.trx_count"
+                  }
+                }
+              }
+            },
+            "ResultPath": "$.shutdown_result",
+            "End": true
+          }
+        }
+      },
+      "ResultPath": "$.shutdown_results",
+      "Next": "MonitorImpact"
+    },
+
+    "MonitorImpact": {
+      "Type": "Wait",
+      "Seconds": 300,
+      "Next": "CheckServiceQuality"
+    },
+
+    "CheckServiceQuality": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "TRACE-TelemetryQuery-${Environment}",
+        "Payload": {
+          "action": "get_anomalies",
+          "parameters": {
+            "region_id.$": "$.region_id",
+            "hours": 1
+          }
+        }
+      },
+      "ResultPath": "$.quality_check",
+      "Next": "EvaluateQuality"
+    },
+
+    "EvaluateQuality": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.quality_check.Payload.body.active_count",
+          "NumericGreaterThan": 3,
+          "Next": "RollbackShutdown"
+        }
+      ],
+      "Default": "OptimizationSuccess"
+    },
+
+    "RollbackShutdown": {
+      "Type": "Map",
+      "ItemsPath": "$.towers_to_optimize",
+      "MaxConcurrency": 5,
+      "Parameters": {
+        "tower_id.$": "$$.Map.Item.Value.tower_id",
+        "trx_count.$": "$$.Map.Item.Value.trx_to_shutdown"
+      },
+      "Iterator": {
+        "StartAt": "ActivateTRX",
+        "States": {
+          "ActivateTRX": {
+            "Type": "Task",
+            "Resource": "arn:aws:states:::lambda:invoke",
+            "Parameters": {
+              "FunctionName": "TRACE-Remediation-${Environment}",
+              "Payload": {
+                "action": "execute_action",
+                "parameters": {
+                  "tower_id.$": "$.tower_id",
+                  "action_type": "activate_trx",
+                  "action_params": {
+                    "trx_count.$": "$.trx_count"
+                  }
+                }
+              }
+            },
+            "ResultPath": "$.activate_result",
+            "End": true
+          }
+        }
+      },
+      "ResultPath": "$.rollback_results",
+      "Next": "RollbackComplete"
+    },
+
+    "RollbackComplete": {
+      "Type": "Pass",
+      "Result": {
+        "message": "Energy optimization rolled back due to service quality impact",
+        "action_taken": "rollback"
+      },
+      "ResultPath": "$.optimization_result",
+      "End": true
+    },
+
+    "OptimizationSuccess": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::dynamodb:putItem",
+      "Parameters": {
+        "TableName": "TRACE-RemediationLog-${Environment}",
+        "Item": {
+          "remediation_id": {
+            "S.$": "States.UUID()"
+          },
+          "timestamp": {
+            "S.$": "$$.State.EnteredTime"
+          },
+          "action_type": {
+            "S": "energy_optimization"
+          },
+          "region_id": {
+            "S.$": "$.region_id"
+          },
+          "towers_optimized": {
+            "N.$": "States.ArrayLength($.towers_to_optimize)"
+          },
+          "success": {
+            "BOOL": true
+          }
+        }
+      },
+      "ResultPath": "$.log_result",
+      "Next": "CalculateSavings"
+    },
+
+    "CalculateSavings": {
+      "Type": "Pass",
+      "Parameters": {
+        "message": "Energy optimization completed successfully",
+        "action_taken": "trx_shutdown",
+        "estimated_savings_percent": 35,
+        "towers_affected.$": "States.ArrayLength($.towers_to_optimize)"
+      },
+      "ResultPath": "$.optimization_result",
+      "End": true
+    }
+  }
+}

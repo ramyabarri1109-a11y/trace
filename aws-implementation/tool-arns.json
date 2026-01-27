@@ -1,0 +1,19 @@
+{
+  "tools": [
+    {
+      "name": "HealthMonitor",
+      "function_name": "TRACE-HealthMonitor-dev",
+      "arn": "arn:aws:lambda:us-east-1:382114757306:function:TRACE-HealthMonitor-dev"
+    },
+    {
+      "name": "Remediation",
+      "function_name": "TRACE-Remediation-dev",
+      "arn": "arn:aws:lambda:us-east-1:382114757306:function:TRACE-Remediation-dev"
+    },
+    {
+      "name": "TelemetryQuery",
+      "function_name": "TRACE-TelemetryQuery-dev",
+      "arn": "arn:aws:lambda:us-east-1:382114757306:function:TRACE-TelemetryQuery-dev"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "environment": "dev",
+  "region": "us-east-1",
+  "account_id": "382114757306",
+  "iam": {
+    "BedrockAgentRoleArn": "arn:aws:iam::382114757306:role/TRACE-Bedrock-Agent-Role-dev",
+    "StepFunctionsRoleArn": "arn:aws:iam::382114757306:role/TRACE-StepFunctions-Role-dev",
+    "LambdaRoleArn": "arn:aws:iam::382114757306:role/TRACE-Lambda-Role-dev",
+    "SageMakerRoleArn": "arn:aws:iam::382114757306:role/TRACE-SageMaker-Role-dev"
+  },
+  "dynamodb": {
+    "SessionMemoryTableName": "TRACE-SessionMemory-dev",
+    "RemediationLogTableName": "TRACE-RemediationLog-dev",
+    "TowerConfigTableName": "TRACE-TowerConfig-dev",
+    "AgentStatusTableName": "TRACE-AgentStatus-dev"
+  },
+  "s3": {
+    "KnowledgeBaseBucketName": "trace-knowledge-base-382114757306-dev",
+    "ModelsBucketName": "trace-models-382114757306-dev",
+    "LambdaCodeBucketName": "trace-lambda-code-382114757306-dev",
+    "FrontendBucketName": "trace-frontend-382114757306-dev",
+    "FrontendBucketWebsiteURL": "http://trace-frontend-382114757306-dev.s3-website-us-east-1.amazonaws.com",
+    "TelemetryBucketName": "trace-telemetry-382114757306-dev"
+  }
+}
