@@ -1,3 +1,5 @@
+<div align="center">
+
 # TRACE – Telecom RAN AI-Powered Cognitive Engine
 
 [![AWS](https://img.shields.io/badge/AWS-Bedrock-FF9900?style=flat-square&logo=amazon-aws)](https://aws.amazon.com/bedrock/)
@@ -5,32 +7,43 @@
 [![Python](https://img.shields.io/badge/Python-3.12-3776AB?style=flat-square&logo=python)](https://python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](LICENSE)
 
-> An autonomous, self-healing telecom network management system powered by Amazon Bedrock Multi-Agent Architecture
+**An autonomous, self-healing telecom network management system powered by Amazon Bedrock Multi-Agent Architecture**
 
-**🔗 [Live Demo](https://d1cmtnu8ims6nq.cloudfront.net)**
+[Live Demo](https://d1cmtnu8ims6nq.cloudfront.net) • [Documentation](#quick-start) • [Architecture](#architecture) • [Report Issue](https://github.com/ramyabarri1109-a11y/trace/issues)
 
----
-
-## Table of Contents
-
-- [Overview](#overview)
-- [Problem Statement](#problem-statement)
-- [Architecture](#architecture)
-- [AWS Services](#aws-services)
-- [Quick Start](#quick-start)
-- [Dashboard](#dashboard)
-- [Project Structure](#project-structure)
-- [Technology Stack](#technology-stack)
-- [Business Outcomes](#business-outcomes)
-- [Team](#team)
+</div>
 
 ---
 
-## Overview
+## 📋 Table of Contents
+
+- [Overview](#-overview)
+- [Features](#-features)
+- [Problem Statement](#-problem-statement)
+- [Architecture](#-architecture)
+- [AWS Services](#-aws-services)
+- [Quick Start](#-quick-start)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running Locally](#running-locally)
+- [Dashboard](#-dashboard)
+- [Project Structure](#-project-structure)
+- [Technology Stack](#-technology-stack)
+- [Business Outcomes](#-business-outcomes)
+- [Contributing](#-contributing)
+- [Team](#-team)
+- [License](#-license)
+- [Support](#-support)
+
+---
+
+## 🌟 Overview
 
 TRACE is an AI-driven multi-agent system that transforms telecom network operations from reactive troubleshooting to proactive, autonomous management. Built entirely on AWS, it uses **Amazon Bedrock Agents** to monitor, predict, decide, and remediate network issues in real-time.
 
-### Key Capabilities
+---
+
+## ✨ Features
 
 - **Autonomous Remediation** – AI agents automatically detect and fix network issues
 - **Multi-Agent Orchestration** – 8 specialized agents working collaboratively
@@ -40,7 +53,7 @@ TRACE is an AI-driven multi-agent system that transforms telecom network operati
 
 ---
 
-## Problem Statement
+## 🎯 Problem Statement
 
 Modern telecom operators face critical challenges:
 
@@ -56,7 +69,7 @@ Modern telecom operators face critical challenges:
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -103,7 +116,7 @@ Modern telecom operators face critical challenges:
 
 ---
 
-## AWS Services
+## ☁️ AWS Services
 
 | Service | Purpose |
 |---------|---------|
@@ -130,28 +143,33 @@ Modern telecom operators face critical challenges:
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- AWS Account with Bedrock access
-- Python 3.12+
-- Node.js 18+
-- AWS CLI configured
+Before you begin, ensure you have the following installed:
 
-### 1. Clone Repository
+- ✅ AWS Account with Bedrock access
+- ✅ Python 3.12+
+- ✅ Node.js 18+
+- ✅ AWS CLI configured
+
+### Installation
+
+#### 1. Clone Repository
 
 ```bash
 git clone https://github.com/ramyabarri1109-a11y/trace.git
 cd trace
 ```
 
-### 2. Deploy AWS Infrastructure
+#### 2. Deploy AWS Infrastructure
 
 ```bash
 cd aws-implementation
 pip install -r requirements.txt
 
+# Deploy infrastructure components
 python 01-infrastructure/setup-infrastructure.py
 python 04-agent-tools/deploy-tools.py
 python 05-bedrock-agents/deploy-agents.py
@@ -159,7 +177,9 @@ python 07-api-gateway/deploy-api.py
 python 08-frontend/deploy-frontend.py
 ```
 
-### 3. Run Dashboard Locally
+### Running Locally
+
+#### 3. Run Dashboard Locally
 
 ```bash
 cd client
@@ -167,15 +187,15 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173
+Open your browser and navigate to: `http://localhost:5173`
 
-### 4. Access Live Dashboard
+#### 4. Access Live Dashboard
 
-**Production:** https://d1cmtnu8ims6nq.cloudfront.net
+**Production URL:** [https://d1cmtnu8ims6nq.cloudfront.net](https://d1cmtnu8ims6nq.cloudfront.net)
 
 ---
 
-## Dashboard
+## 📊 Dashboard
 
 The TRACE dashboard provides real-time visibility into network operations:
 
@@ -193,7 +213,7 @@ The TRACE dashboard provides real-time visibility into network operations:
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 trace/
@@ -216,7 +236,7 @@ trace/
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 ### Backend
 
@@ -240,7 +260,7 @@ trace/
 
 ---
 
-## Business Outcomes
+## 📈 Business Outcomes
 
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
@@ -251,7 +271,21 @@ trace/
 
 ---
 
-## Team
+## 🤝 Contributing
+
+We welcome contributions to TRACE! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**: `git checkout -b feature/amazing-feature`
+3. **Commit your changes**: `git commit -m 'Add amazing feature'`
+4. **Push to the branch**: `git push origin feature/amazing-feature`
+5. **Open a Pull Request**
+
+Please ensure your code follows the existing style and includes appropriate tests.
+
+---
+
+## 👥 Team
 
 - Vinay Dangeti
 - Sudeep Aryan
@@ -263,12 +297,26 @@ trace/
 
 ---
 
-## License
+## 📄 License
 
-MIT License – see [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
 
-<p align="center">
-  <strong>Built with ❤️ using Amazon Bedrock</strong>
-</p>
+## 💬 Support
+
+For questions, issues, or support:
+
+- 📧 **Email**: sudeeparyang@gmail.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/ramyabarri1109-a11y/trace/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/ramyabarri1109-a11y/trace/discussions)
+
+---
+
+<div align="center">
+
+**Built with ❤️ using Amazon Bedrock**
+
+[⬆ Back to Top](#trace--telecom-ran-ai-powered-cognitive-engine)
+
+</div>
