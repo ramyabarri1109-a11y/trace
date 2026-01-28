@@ -23,16 +23,56 @@ Key capabilities:
 - Amazon CloudFront: Content delivery
 - AWS IAM: Security and access control
 
-## MCP Servers
+## MCP on AWS
 
-TRACE uses Model Context Protocol (MCP) for agent-to-agent context sharing:
+TRACE uses Model Context Protocol (MCP) tools deployed on AWS Lambda:
 
-- Telemetry Server: Real-time tower metrics and anomaly detection
-- Tower Config Server: Tower configuration and management
-- Energy Server: Energy optimization and power management
-- Policy Server: Remediation policies and self-healing workflows
+### AWS Lambda Deployment
 
-Start MCP servers:
+```bash
+# Deploy using CloudFormation
+chmod +x deploy_mcp.sh
+./deploy_mcp.sh
+```
+
+This deploys:
+- **Lambda Function**: `trace-mcp-tools` - All MCP tools in one function
+- **API Gateway**: HTTP endpoint for MCP tool invocation
+- **DynamoDB Tables**: Remediation and energy logging
+
+### MCP Tools Available
+
+| Tool | Description |
+|------|-------------|
+| `get_tower_telemetry` | Real-time tower metrics |
+| `detect_tower_anomalies` | Anomaly detection |
+| `get_network_health_summary` | Network overview |
+| `get_power_consumption_report` | Power usage & savings |
+| `set_power_mode` | Change tower power mode |
+| `set_active_trx` | Control active TRX count |
+| `activate_warm_spare` | Enable spare capacity |
+| `get_energy_recommendations` | Optimization suggestions |
+| `execute_energy_optimization` | Apply energy savings |
+| `execute_remediation` | Run self-healing policy |
+
+### Test MCP API
+
+```bash
+# Get network health
+curl -X POST https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/v1/mcp/tool \
+  -H 'Content-Type: application/json' \
+  -d '{"tool": "get_network_health_summary", "parameters": {}}'
+
+# Get energy recommendations
+curl -X POST https://YOUR-API-ID.execute-api.us-east-1.amazonaws.com/v1/mcp/tool \
+  -H 'Content-Type: application/json' \
+  -d '{"tool": "get_energy_recommendations", "parameters": {}}'
+```
+
+### Local MCP Servers (Development)
+
+For local development, MCP servers are also available:
+
 ```bash
 cd mcp_servers
 pip install -r requirements.txt
